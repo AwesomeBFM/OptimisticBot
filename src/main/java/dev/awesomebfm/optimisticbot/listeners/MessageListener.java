@@ -43,6 +43,7 @@ public class MessageListener extends ListenerAdapter {
                                     4. No NSFW content
                                     5. Excessive spamming and unnecessary pinging is not allowed
                                     6. No impersonation of any kind
+                                    7. Follow Discord TOS at all times
                                     
                                     Just don't cause problems, we are not here to moderate you and you are not here to be moderated"""
                     );
@@ -51,9 +52,11 @@ public class MessageListener extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(embed.build()).queue();
                     break;
                 case "?ban":
-                    if (e.getMember().hasPermission(Permission.BAN_MEMBERS)) {
-                        e.getChannel().sendMessage("You have been banned").queue();
+                    if (!e.getMember().hasPermission(Permission.BAN_MEMBERS)) {
+                        return;
                     }
+
+
                     break;
             }
         }
